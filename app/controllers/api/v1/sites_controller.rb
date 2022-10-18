@@ -5,7 +5,7 @@ module Api
       
       # GET /sites
       def index
-        render json: Site.all
+        render json: Site.all, status: :ok
       end
 
       # POST /site
@@ -15,7 +15,9 @@ module Api
         if site.save
           render json: site, status: :created
         else
-          render json: site.errors, status: :unprocessable_entity
+          render json: { 
+            error: site.errors
+          }, status: :unprocessable_entity
         end
       end
 
@@ -24,7 +26,9 @@ module Api
         if @site.update(site_params)
           render json: @site, status: 200
         else
-          render json: site.errors, status: :unprocessable_entity
+          render json: { 
+            error: site.errors
+          }, status: :unprocessable_entity
         end
       end
 
@@ -35,7 +39,7 @@ module Api
         head :no_content
       end
 
-      
+
     private
 
       def site_params
@@ -44,6 +48,9 @@ module Api
 
       def set_site
         @site = Site.find(params[:id])
+        render json: {
+          error: 'not found'
+        }, status: 404 if @site.nil?
       end
     end
   end
