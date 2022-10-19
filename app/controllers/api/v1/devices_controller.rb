@@ -3,11 +3,13 @@ module Api
     class DevicesController < ApplicationController
       before_action :set_site
       before_action :set_device, only: %i[update destroy]
-
+      
+      api :GET, "/api/v1/sites/:site_id/devices", "This shows device list for a site"
       def index
         render json: @site.devices, status: :ok
       end
     
+      api :POST, "/api/v1/sites/:site_id/devices", "This end-point for creating device for a site"
       def create
         device = @site.devices.new(device_params)
 
@@ -19,7 +21,9 @@ module Api
           }, status: :unprocessable_entity
         end
       end
-    
+
+      api :PATCH, "/api/v1/sites/:site_id/devices/:id", "This end-point for updating device for a site"
+      api :PUT, "/api/v1/sites/:site_id/devices/:id", "This end-point for updating device for a site"
       def update
         if @device.update(device_params)
           render json: @device, status: :ok
@@ -29,10 +33,11 @@ module Api
           }, status: :unprocessable_entity
         end
       end
-    
+
+      api :DELETE, "/api/v1/sites/:site_id/devices/:id", "This end ppoint for deleting device for a site"
       def destroy
         @device.destroy!
-        
+
         head :no_content
       end
 

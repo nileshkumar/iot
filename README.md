@@ -12,11 +12,11 @@
 
 * Database : Postgresql
 
-* Database initialization
-
 * How to run the test suite : bundle exec rspec
 
-* end-points
+* Start rails server: rails server
+
+* end-points : http://localhost:3000/apipie
 
 SITES RESOURCE
 
@@ -24,7 +24,6 @@ SITES RESOURCE
 - POST   /api/v1/sites 
 - PUT    /api/v1/sites/:id
 - DELETE /api/v1/sites/:id
-
 
 DEVICE RESOURCE
 

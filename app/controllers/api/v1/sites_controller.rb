@@ -3,12 +3,12 @@ module Api
     class SitesController < ApplicationController
       before_action :set_site, only: [:edit, :update, :destroy]
       
-      # GET /sites
+      api :GET, "/api/v1/sites", "This end point lists sites"
       def index
         render json: Site.all, status: :ok
       end
 
-      # POST /site
+      api :POST, "/api/v1/sites", "This end point create a site"
       def create
         site = Site.create(site_params)
 
@@ -21,7 +21,8 @@ module Api
         end
       end
 
-      # PUT /sites/:id
+      api :PATCH, "/api/v1/sites/:id", "This end point update a site"
+      api :PUT, "/api/v1/sites/:id", "This end point update a site"
       def update
         if @site.update(site_params)
           render json: @site, status: 200
@@ -32,7 +33,7 @@ module Api
         end
       end
 
-      # DELETE /sites/:id
+      api :DELETE, "/api/v1/sites/:id", "This end point deletes a site"
       def destroy
         @site.destroy!
 
